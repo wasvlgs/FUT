@@ -508,6 +508,88 @@ function ajoutePlayer(){
       getDefElement.style.border = "2px solid black";
       getPhyElement.style.border = "2px solid black";
 
+
+
+      let getID;
+      if(players.length >= 1){
+        getID = players[players.length - 1] +1;
+      }else{
+        getID = 1;
+      }
+
+      let getFlag;
+      if(getNationalityElement.value == "AG"){
+        getFlag = "https://cdn.sofifa.net/flags/ar.png";
+      }else if(getNationalityElement.value == "PG"){
+        getFlag = "https://cdn.sofifa.net/flags/pt.png";
+      }else if(getNationalityElement.value == "FR"){
+        getFlag = "https://cdn.sofifa.net/flags/fr.png";
+      }else if(getNationalityElement.value == "BZ"){
+        getFlag = "https://cdn.sofifa.net/flags/br.png";
+      }else if(getNationalityElement.value == "EG"){
+        getFlag = "https://cdn.sofifa.net/flags/eg.png";
+      }else{
+        alert("Error Try Again");
+        return;
+      }
+
+
+      let getLogo;
+      if(getClubElement.value == "IM"){
+        getLogo = "https://cdn.sofifa.net/meta/team/239235/120.png";
+      }else if(getClubElement.value == "AN"){
+        getLogo = "https://cdn.sofifa.net/meta/team/2506/120.png";
+      }else if(getClubElement.value == "MC"){
+        getLogo = "https://cdn.sofifa.net/players/239/085/25_120.png";
+      }else if(getClubElement.value == "RM"){
+        getLogo = "https://cdn.sofifa.net/meta/team/3468/120.png";
+      }else if(getClubElement.value == "LP"){
+        getLogo = "ttps://cdn.sofifa.net/meta/team/8/120.png";
+      }else{
+        alert("Error Try Again");
+        return;
+      }
+
+      let getNationality;
+      if(getNationality.value == "AG"){
+        getNationality = "https://cdn.sofifa.net/meta/team/239235/120.png";
+      }else if(getNationality.value == "PG"){
+        getNationality = "https://cdn.sofifa.net/meta/team/2506/120.png";
+      }else if(getNationality.value == "FR"){
+        getNationality = "https://cdn.sofifa.net/players/239/085/25_120.png";
+      }else if(getNationality.value == "BZ"){
+        getNationality = "https://cdn.sofifa.net/meta/team/3468/120.png";
+      }else if(getNationality.value == "EG"){
+        getNationality = "ttps://cdn.sofifa.net/meta/team/8/120.png";
+      }else{
+        alert("Error Try Again");
+        return;
+      }
+
+      players.push({
+        "id": getID,
+        "name": getNameElement.value,
+        "photo": getImageElement.value,
+        "position": getPositionElement.value,
+        "nationality": getNationalityElement.value,
+        "flag": getFlag,
+        "club": getClubElement.value,
+        "logo": getLogo,
+        "rating": getRatElement.value,
+        "pace": getPacElement.value,
+        "shooting": getShoElement.value,
+        "passing": getPasElement.value,
+        "dribbling": getDriElement.value,
+        "defending": getDefElement.value,
+        "physical": getPhyElement.value
+      })
+
+      let ajouteSection = document.getElementById("ajouteSection");
+      ajouteSection.style.display = "none";
+      afficheListPlayers();
+
     }
   })
 }
+
+
