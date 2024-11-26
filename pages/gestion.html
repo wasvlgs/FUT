@@ -27,7 +27,7 @@
         </div>
 
         <div class="searchSection w-full h-[6%] flex justify-center items-center ">
-            <input type="text" placeholder="Search for player" class="w-2/3 h-[35px] pl-4 border-none outline-none rounded-[8px]">
+            <input id="getSearchInput" type="text" placeholder="Search for player" class="w-2/3 h-[35px] pl-4 border-none outline-none rounded-[8px]">
         </div>
 
 
@@ -247,9 +247,9 @@
             <div class="topChangement w-full h-[80px] flex items-center pl-10 border-b-2 border-yellowColor">
                 <h2 class="text-2xl text-yellowColor">Changement</h2>
             </div>
-            <div class="afficheChangement p-4 flex gap-3 flex-wrap justify-center">
+            <div id="changementElement" class="afficheChangement p-4 flex gap-3 flex-wrap justify-center">
 
-                <div draggable="true" class="changement w-full max-w-[200px] h-[280px] bg-[#1a1a1a] rounded-[15px] text-white shadow-[0px_0px_3px_-1px_yellow]">
+                <!-- <div draggable="true" class="changement w-full max-w-[200px] h-[280px] bg-[#1a1a1a] rounded-[15px] text-white shadow-[0px_0px_3px_-1px_yellow]">
 
                     <div class="topCardChangement h-[35%] w-full flex justify-center items-center">
                         <div class="profileChangement w-[80px] h-[80px] rounded-[50%] bg-[#6c6c6c] flex justify-center items-center overflow-hidden">
@@ -292,7 +292,7 @@
                             <img src="https://cdn.sofifa.net/meta/team/239235/120.png" alt="Inter Miami"  class="w-[20px] h-[20px]">
                         </div>
                     </div>
-                </div>
+                </div> -->
 
 
             </div>
@@ -369,6 +369,10 @@
             <button id="buttonSubmit" class="w-[150px] h-[45px] bg-orangeColor text-md font-semibold rounded-[10px]">ADD Player</button>
         </div>
     </div>
+
+    <div id="addSuccess" class="fixed top-10 h-[70px] w-full flex justify-center hidden"><div class="w-full max-w-[400px] bg-[#1dbb1d] h-full rounded-[5px] border-4 border-[green] flex items-center pl-5">
+        <h6 class="font-semibold text-white">Player has been added avec success</h6>
+    </div></div>
 
     <script src="../js/script.js"></script>
 </body>

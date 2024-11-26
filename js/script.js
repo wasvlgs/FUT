@@ -155,6 +155,11 @@ let players = [
 ]
 
 
+// let playersActive = [
+
+// ]
+
+
 
 // ************************* Call Functions ****************************
 // *********************************************************************
@@ -164,9 +169,11 @@ document.addEventListener("DOMContentLoaded",()=>{
 
 
     afficheListPlayers();
+    afficheListChangement();
     teamPlanning();
     popUpAjoutSection();
     ajoutePlayer();
+    searchFunction();
 
 })
 
@@ -183,26 +190,86 @@ function afficheListPlayers(){
 
     for(let i = 0; i < players.length; i++){
         listElement.innerHTML += `
-        <div class="player w-full min-h-[60px] bg-[#2a2a30] flex items-center justify-between rounded-[5px]">
+        <div draggable="true" class="player w-full min-h-[60px] bg-[#2a2a30] flex items-center justify-between rounded-[5px]">
     
                 <div class="flex items-center w-[75%] pl-5 cursor-pointer">
                         <div class="profileImage w-[40px] h-[40px] rounded-[50%] bg-[#bfbfbf] overflow-hidden">
                             <img src="${players[i].photo}" alt="${players[i].name}" class="w-[40px] h-[40px]">
                         </div>
                         <div class="playerInformation flex flex-col justify-evenly pl-4 overflow-y-auto">
-                            <h3 class="text-white">${players[i].name}</h3>
+                            <h3 class="text-white namePlayer">${players[i].name}</h3>
                             <h6 class="text-[#b0b0b0]">${players[i].nationality}</h6>
                         </div>
                 </div>
 
                 <div class="w-[20%] h-full flex justify-center items-center">
-                    <i class="fa-solid fa-trash text-xl text-red-600 cursor-pointer"></i>
+                    <i onclick="removePlayer(${i},this)" class="fa-solid fa-trash text-xl text-red-600 cursor-pointer"></i>
                 </div>
             </div>
 
         `
     }
 }
+
+// ================== afficher Players on list Changement ==================
+
+
+function afficheListChangement(){
+  let changementElement = document.getElementById("changementElement");
+
+  changementElement.innerHTML = '';
+
+  for(let i = 0; i < players.length; i++){
+      changementElement.innerHTML += `
+      <div draggable="true" class="changement w-full max-w-[200px] h-[280px] bg-[#1a1a1a] rounded-[15px] text-white shadow-[0px_0px_3px_-1px_yellow]">
+
+                    <div class="topCardChangement h-[35%] w-full flex justify-center items-center">
+                        <div class="profileChangement w-[80px] h-[80px] rounded-[50%] bg-[#6c6c6c] flex justify-center items-center overflow-hidden">
+                            <img src="${players[i].photo}" alt="${players[i].name}" class="w-[80px] h-[80px]">
+                        </div>
+                    </div>
+                    <div class="contentCardChangement w-full h-[65%]">
+                        <div class="nameCard flex flex-col items-center h-20%">
+                            <h2 class="font-bold text-md mb-[-3px]">${players[i].name}</h2>
+                            <h3 class="font-medium text-sm text-[#868686]">${players[i].nationality}</h3>
+                        </div>
+                        <div class="competanceCard p-2 h-[60%] justify-center grid grid-cols-[auto_auto_auto] grid-rows-[auto_auto] gap-x-5">
+                            <div>
+                                <h5 class="text-[0.7rem] font-medium text-yellowColor mb-[-4px]">PAC</h5>
+                                <h6 class="text-[1rem] font-semibold">${players[i].pace}</h6>
+                            </div>
+                            <div>
+                                <h5 class="text-[0.7rem] font-medium text-yellowColor mb-[-4px]">SHO</h5>
+                                <h6 class="text-[1rem] font-semibold">${players[i].shooting}</h6>
+                            </div>
+                            <div>
+                                <h5 class="text-[0.7rem] font-medium text-yellowColor mb-[-4px]">PAS</h5>
+                                <h6 class="text-[1rem] font-semibold">${players[i].passing}</h6>
+                            </div>
+                            <div>
+                                <h5 class="text-[0.7rem] font-medium text-yellowColor mb-[-4px]">DRI</h5>
+                                <h6 class="text-[1rem] font-semibold">${players[i].dribbling}</h6>
+                            </div>
+                            <div>
+                                <h5 class="text-[0.7rem] font-medium text-yellowColor mb-[-4px]">DEF</h5>
+                                <h6 class="text-[1rem] font-semibold">${players[i].defending}</h6>
+                            </div>
+                            <div>
+                                <h5 class="text-[0.7rem] font-medium text-yellowColor mb-[-4px]">PHY</h5>
+                                <h6 class="text-[1rem] font-semibold">${players[i].physical}</h6>
+                            </div>
+                        </div>
+                        <div class="cardBottomChangement w-full h-[17%] flex justify-center gap-3">
+                            <img src="https://cdn.sofifa.net/flags/ar.png" alt="Argentina" class="w-[30px] h-[20px]">
+                            <img src="https://cdn.sofifa.net/meta/team/239235/120.png" alt="Inter Miami"  class="w-[20px] h-[20px]">
+                        </div>
+                    </div>
+                </div>
+
+      `
+  }
+}
+
 
 
 // ========================= team planning ===========================
@@ -544,23 +611,23 @@ function ajoutePlayer(){
       }else if(getClubElement.value == "RM"){
         getLogo = "https://cdn.sofifa.net/meta/team/3468/120.png";
       }else if(getClubElement.value == "LP"){
-        getLogo = "ttps://cdn.sofifa.net/meta/team/8/120.png";
+        getLogo = "https://cdn.sofifa.net/meta/team/8/120.png";
       }else{
         alert("Error Try Again");
         return;
       }
 
       let getNationality;
-      if(getNationality.value == "AG"){
-        getNationality = "https://cdn.sofifa.net/meta/team/239235/120.png";
-      }else if(getNationality.value == "PG"){
-        getNationality = "https://cdn.sofifa.net/meta/team/2506/120.png";
-      }else if(getNationality.value == "FR"){
-        getNationality = "https://cdn.sofifa.net/players/239/085/25_120.png";
-      }else if(getNationality.value == "BZ"){
-        getNationality = "https://cdn.sofifa.net/meta/team/3468/120.png";
-      }else if(getNationality.value == "EG"){
-        getNationality = "ttps://cdn.sofifa.net/meta/team/8/120.png";
+      if(getNationalityElement.value == "AG"){
+        getNationality = "Argentina";
+      }else if(getNationalityElement.value == "PG"){
+        getNationality = "Portugal";
+      }else if(getNationalityElement.value == "FR"){
+        getNationality = "France";
+      }else if(getNationalityElement.value == "BZ"){
+        getNationality = "Brazil";
+      }else if(getNationalityElement.value == "EG"){
+        getNationality = "Egypt";
       }else{
         alert("Error Try Again");
         return;
@@ -571,7 +638,7 @@ function ajoutePlayer(){
         "name": getNameElement.value,
         "photo": getImageElement.value,
         "position": getPositionElement.value,
-        "nationality": getNationalityElement.value,
+        "nationality": getNationality,
         "flag": getFlag,
         "club": getClubElement.value,
         "logo": getLogo,
@@ -587,9 +654,53 @@ function ajoutePlayer(){
       let ajouteSection = document.getElementById("ajouteSection");
       ajouteSection.style.display = "none";
       afficheListPlayers();
+      afficheListChangement();
+
+      let addSuccess = document.getElementById("addSuccess");
+      addSuccess.style.display = "flex";
+
+      setTimeout(()=>{
+        addSuccess.style.display = "none";
+      },2000)
 
     }
   })
 }
 
 
+// ====================== Search Function =========================
+
+
+
+function searchFunction(){
+  let getSearchInput = document.getElementById("getSearchInput");
+
+  let getPlayers = document.getElementsByClassName("player");
+
+  getSearchInput.onkeyup = ()=>{
+    
+    for(let i = 0; i < getPlayers.length; i++){
+      let namePlayer = getPlayers[i].getElementsByClassName("namePlayer")[0];
+
+      if(namePlayer.innerText.toUpperCase().indexOf(getSearchInput.value.trim().toUpperCase()) >= 0){
+        getPlayers[i].style.display = "flex";
+      }else{
+        getPlayers[i].style.display = "none";
+      }
+
+    }
+
+  }
+}
+
+
+
+// ====================== Remove Player Function =====================
+
+
+function removePlayer(index,element){
+  
+  players.splice(index,1);
+  element.parentElement.parentElement.remove();
+
+}
