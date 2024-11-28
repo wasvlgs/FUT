@@ -508,11 +508,18 @@ function afficheListPlayers(){
 
 function afficheListChangement(){
   let changementElement = document.getElementById("changementElement");
-
+  let answer = true;
   changementElement.innerHTML = '';
 
   for(let i = 0; i < players.length; i++){
-      changementElement.innerHTML += `
+    for(let j = 0; j < playersActive.length; j++){
+      if(players[i].id == playersActive[j].id){
+        answer = false;
+      }else{
+        answer = true;
+      }
+    }
+      if(answer === true){changementElement.innerHTML += `
       <div  onclick="openEditSection(${i})" draggable="true" class="changement w-full max-w-[200px] h-[280px] bg-[#1a1a1a] rounded-[15px] text-white shadow-[0px_0px_3px_-1px_yellow]">
 
                     <div class="topCardChangement h-[35%] w-full flex justify-center items-center">
@@ -558,7 +565,7 @@ function afficheListChangement(){
                     </div>
                 </div>
 
-      `
+      `}
   }
 }
 
@@ -1044,7 +1051,7 @@ function editFunction(){
 }
 
 
-// ======================= Select Position ==========================
+// ======================= Select and affiche players Position ==========================
 
 
 function selectPosition(ID){
@@ -1237,17 +1244,10 @@ function selectPosition(ID){
     addPlayerTeamSection.style.display = "none";
 
     afficherCardPlayers();
-    
+    afficheListChangement();
   }
 
 }
-
-
-
-
-
-
-
 
 function afficherCardPlayers(){
   let getTeamPosition = document.getElementsByClassName("card");
@@ -1350,6 +1350,5 @@ function afficherCardPlayers(){
             </div>`
     }
   }
-
 }
 
