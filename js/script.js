@@ -1115,26 +1115,68 @@ function selectPosition(ID){
   addPositionButton.onclick = ()=>{
     for(let i = 0; i < players.length; i++){
       if(players[i].id == ID && playersActive.length <= 11){
-        let answer;
+        let answer = true;
 
 
-        if(playersActive.length > 0){
-          for(let j = 0; j < playersActive.length; j++){
-            if(playersActive[j].id == players[i].id){
-              playersActive[j].active = positionSelected;
-              answer = false;
-              break;
-            }else{
-              answer = true;
+        // if(playersActive.length > 0){
+        //   for(let j = 0; j < playersActive.length; j++){
+        //     if(playersActive[j].id == players[i].id){
+        //       playersActive[j].active = positionSelected;
+        //       answer = false;
+        //       break;
+        //     }else{
+        //       answer = true;
+        //     }
+        //   }
+        // }else{
+        //   answer = true;
+        // }
+
+        for(let j = 0; j < playersActive.length; j++){
+          if (getPositionPlay === "ATT") {
+            if ((positionSelected === "LW" || positionSelected === "LF") && (playersActive[j].active === "LW" || playersActive[j].active === "LF")) {
+                playersActive.splice(j, 1);
+            } else if ((positionSelected === "RF" || positionSelected === "RW") && (playersActive[j].active === "RF" || playersActive[j].active === "RW")) {
+                playersActive.splice(j, 1);
+            } else if (positionSelected === "CF" && playersActive[j].active === "CF") {
+                playersActive.splice(j, 1);
             }
-          }
-        }else{
-          answer = true;
+        } else if (getPositionPlay === "MED") {
+            if ((positionSelected === "CAM" || positionSelected === "RM") && (playersActive[j].active === "CAM" || playersActive[j].active === "RM")) {
+                playersActive.splice(j, 1);
+            } else if ((positionSelected === "LM" || positionSelected === "CDM") && (playersActive[j].active === "LM" || playersActive[j].active === "CDM")) {
+                playersActive.splice(j, 1);
+            } else if (positionSelected === "CM" && playersActive[j].active === "CM") {
+                playersActive.splice(j, 1);
+            }
+        } else if (getPositionPlay === "DEF") {
+            if ((positionSelected === "RB" || positionSelected === "RWB") && (playersActive[j].active === "RB" || playersActive[j].active === "RWB")) {
+                playersActive.splice(j, 1);
+            } else if (positionSelected === "LB" && playersActive[j].active === "LB") {
+                playersActive.splice(j, 1);
+            } else if (positionSelected === "CB" && playersActive[j].active === "CB") {
+                playersActive.splice(j, 1);
+            } else if (positionSelected === "LWB" && playersActive[j].active === "LWB") {
+                playersActive.splice(j, 1);
+            }
+        } else if (getPositionPlay === "GOL" && positionSelected === "GK" && playersActive[j].active === "GK") {
+            playersActive.splice(j, 1);
+        }
         }
         
-        
+        for(let j = 0; j < playersActive.length; j++){
+              if(playersActive[j].id == players[i].id){
+                playersActive[j].active = positionSelected;
+                answer = false;
+                break;
+              }
+              
+            }
 
         if(answer == true){
+
+            
+          
           playersActive.push({
             "id": players[i].id,
             "name": players[i].name,
@@ -1156,6 +1198,8 @@ function selectPosition(ID){
 
           })
 
+          console.log(playersActive)
+
           
           let addSuccess = document.getElementById("addSuccess");
           addSuccess.innerHTML = `<div class="w-full max-w-[400px] bg-[#1ebb1e] h-full rounded-[5px] border-4 border-[green] flex items-center pl-5">
@@ -1169,7 +1213,7 @@ function selectPosition(ID){
         }else if(answer == false){
             let addSuccess = document.getElementById("addSuccess");
             addSuccess.innerHTML = `<div class="w-full max-w-[400px] bg-[#c7c418] h-full rounded-[5px] border-4 border-[orange] flex items-center pl-5">
-        <h6 class="font-semibold text-white">Player has already been selected</h6>
+        <h6 class="font-semibold text-white">Player change position</h6>
     </div>`
             addSuccess.style.display = "flex";
 
@@ -1198,131 +1242,6 @@ function selectPosition(ID){
 
 }
 
-
-// function afficherCardPlayers(){
-//   let getTeamPosition = document.getElementsByClassName("card");
-//   let index;
-//   for(let i = 0; i < playersActive.length; i++){
-//     if(getPlanningSelect.value == "4-3-3"){
-//       if(playersActive[i].positionPlay == "ATT"){
-//         if(playersActive[i].active == "LW" || playersActive[i].active == "LF"){
-//           index = 0;
-//         }else if(playersActive[i].active == "RF" || playersActive[i].active == "RW"){
-//           index = 4;
-//         }else if(playersActive[i].active == "CF"){
-//           index = 2;
-//         }
-//       }else if(playersActive[i].positionPlay == "MED"){
-//         if(playersActive[i].active == "CAM" || playersActive[i].active == "RM"){
-//           index = 9;
-//         }else if(playersActive[i].active == "LM" || playersActive[i].active == "CDM"){
-//           index = 5;
-//         }else if(playersActive[i].active == "CM"){
-//           index = 7;
-//         }
-//       }else if(playersActive[i].positionPlay == "DEF"){
-//         if(playersActive[i].active == "RB" || playersActive[i].active == "RWB"){
-//           index = 10;
-//         }else if(playersActive[i].active == "LB"){
-//           index = 11;
-//         }else if(playersActive[i].active == "CB"){
-//           index = 13;
-//         }else if(playersActive[i].active == "LWB"){
-//           index = 14;
-//         }
-//       }else if(playersActive[i].positionPlay == "GOL"){
-//         if(playersActive[i].active == "GK"){
-//           index = 17;
-//         }
-//       }else{
-//         alert("no team")
-//       }
-//     }else if(getPlanningSelect.value == "4-4-2"){
-//       if(playersActive[i].positionPlay == "ATT"){
-//         if(playersActive[i].active == "LF" || playersActive[i].active == "LW"){
-//           index = 1;
-//         }else if(playersActive[i].active == "RF" || playersActive[i].active == "RW"){
-//           index = 3;
-//         }else if(playersActive[i].active == "CF"){
-//           index = 5;
-//         }
-//       }else if(playersActive[i].positionPlay == "MED"){
-//         if(playersActive[i].active == "CAM" || playersActive[i].active == "RM"){
-//           index = 9;
-//         }else if(playersActive[i].active == "LM" || playersActive[i].active == "CDM"){
-//           index = 8;
-//         }else if(playersActive[i].active == "CM"){
-//           index = 6;
-//         }
-//       }else if(playersActive[i].positionPlay == "DEF"){
-//         if(playersActive[i].active == "RB" || playersActive[i].active == "RWB"){
-//           index = 10;
-//         }else if(playersActive[i].active == "LB"){
-//           index = 11;
-//         }else if(playersActive[i].active == "CB"){
-//           index = 13;
-//         }else if(playersActive[i].active == "LWB"){
-//           index = 14;
-//         }
-//       }else if(playersActive[i].positionPlay == "GOL"){
-//         if(playersActive[i].active == "GK"){
-//           index = 17;
-//         }
-//       }
-//     }
-      
-    
-    
-//     if(index >= 0){
-//       getTeamPosition[index].innerHTML = `
-//             <div class="h-full w-full bg-[url(../img/badge_gold.webp)] bg-[length:100%_115%] bg-no-repeat bg-center">
-//                 <div class="h-[35%] w-full relative flex flex-col justify-end pl-6  max-md:pl-3">
-//                     <h2 class="font-bold text-[1rem] mb-[-2px] max-lg:text-[0.7rem] max-md:text-[0.5rem]">${playersActive[i].rating}</h2>
-//                     <h3 class="text-[0.5rem] font-semibold max-lg:text-[0.5rem] max-md:text-[0.3rem]">RW</h3>
-//                 </div>
-//                 <div class="w-full h-[31%] flex items-end justify-center">
-//                     <img src="${playersActive[i].photo}" alt="${playersActive[i].name}" class="w-[85px] h-[85px] max-lg:w-[50px] max-lg:h-[50px]">
-//                 </div>
-//                 <div class="w-full h-[28%]">
-//                     <h2 class="w-full text-center text-[0.6rem] font-bold max-lg:text-[0.4rem]  max-md:text-[0.3rem]">${playersActive[i].name}</h2>
-//                     <div class="w-full flex justify-center gap-2  max-lg:gap-[3px]">
-//                         <div>
-//                             <h5 class="text-[0.35rem] font-medium mb-[-4px] max-lg:text-[0.25rem] max-md:text-[0.2rem] max-md:mb-[-2px]">PAC</h5>
-//                             <h6 class="text-[0.6rem] font-semibold max-lg:text-[0.45rem] max-md:text-[0.4rem]">${playersActive[i].pace}</h6>
-//                         </div>
-//                         <div>
-//                             <h5 class="text-[0.35rem] font-medium mb-[-4px] max-lg:text-[0.25rem] max-md:text-[0.2rem] max-md:mb-[-2px]">SHO</h5>
-//                             <h6 class="text-[0.6rem] font-semibold max-lg:text-[0.45rem] max-md:text-[0.4rem]">${playersActive[i].shooting}</h6>
-//                         </div>
-//                         <div>
-//                             <h5 class="text-[0.35rem] font-medium mb-[-4px] max-lg:text-[0.25rem] max-md:text-[0.2rem] max-md:mb-[-2px]">PAS</h5>
-//                             <h6 class="text-[0.6rem] font-semibold max-lg:text-[0.45rem] max-md:text-[0.4rem]">${playersActive[i].passing}</h6>
-//                         </div>
-//                         <div>
-//                             <h5 class="text-[0.35rem] font-medium mb-[-4px] max-lg:text-[0.25rem] max-md:text-[0.2rem] max-md:mb-[-2px]">DRI</h5>
-//                             <h6 class="text-[0.6rem] font-semibold max-lg:text-[0.45rem] max-md:text-[0.4rem]">${playersActive[i].dribbling}</h6>
-//                         </div>
-//                         <div>
-//                             <h5 class="text-[0.35rem] font-medium mb-[-4px] max-lg:text-[0.25rem] max-md:text-[0.2rem] max-md:mb-[-2px]">DEF</h5>
-//                             <h6 class="text-[0.6rem] font-semibold max-lg:text-[0.45rem] max-md:text-[0.4rem]">${playersActive[i].defending}</h6>
-//                         </div>
-//                         <div>
-//                             <h5 class="text-[0.35rem] font-medium mb-[-4px] max-lg:text-[0.25rem] max-md:text-[0.2rem]  max-md:mb-[-2px]">PHY</h5>
-//                             <h6 class="text-[0.6rem] font-semibold max-lg:text-[0.45rem] max-md:text-[0.4rem]">${playersActive[i].physical}</h6>
-//                         </div>
-//                     </div>
-//                     <div class="flags flex justify-center items-center gap-2 h-[28%] items-end  max-lg:gap-1  max-md:h-[20%]">
-//                         <img src="${playersActive[i].flag}" alt="${playersActive[i].nationality}" class="w-[15px] h-[10px]  max-md:w-[8px]  max-md:h-[5px]">
-//                         <img src="${playersActive[i].logo}" alt="${playersActive[i].club}"  class="w-[10px] h-[10px]  max-md:w-[8px]  max-md:h-[8px]">
-//                     </div>
-//                 </div>
-//             </div>
-//       `
-//     }else{
-//       getTeamPosition[index].innerHTML = ``;
-//     }
-//   }
-// }
 
 
 
@@ -1357,6 +1276,29 @@ function afficherCardPlayers(){
           answer = false;
         }
       }
+    }else if(getPlanningSelect.value == "4-4-2"){
+      for(let i = 0; i < playersActive.length; i++){
+        if (
+          (j === 1 && playersActive[i].positionPlay === "ATT" && (playersActive[i].active === "LW" || playersActive[i].active === "LF")) ||
+          (j === 3 && playersActive[i].positionPlay === "ATT" && (playersActive[i].active === "RF" || playersActive[i].active === "RW")) ||
+          (j === 5 && playersActive[i].positionPlay === "ATT" && playersActive[i].active === "CF") ||
+          (j === 6 && playersActive[i].positionPlay === "MED" && (playersActive[i].active === "CAM" || playersActive[i].active === "RM")) ||
+          (j === 8 && playersActive[i].positionPlay === "MED" && (playersActive[i].active === "LM" || playersActive[i].active === "CDM")) ||
+          (j === 9 && playersActive[i].positionPlay === "MED" && playersActive[i].active === "CM") ||
+          (j === 10 && playersActive[i].positionPlay === "DEF" && (playersActive[i].active === "RB" || playersActive[i].active === "RWB")) ||
+          (j === 11 && playersActive[i].positionPlay === "DEF" && playersActive[i].active === "LB") ||
+          (j === 13 && playersActive[i].positionPlay === "DEF" && playersActive[i].active === "CB") ||
+          (j === 14 && playersActive[i].positionPlay === "DEF" && playersActive[i].active === "LWB") ||
+          (j === 17 && playersActive[i].positionPlay === "GOL" && playersActive[i].active === "GK")
+      ) {
+          answer = true;
+          index = i;
+          break;
+      }else{
+          answer = false;
+        }
+      }
+    }
       
     if(answer == true){
       getTeamPosition[j].innerHTML = `
@@ -1407,7 +1349,6 @@ function afficherCardPlayers(){
                 <span class="text-6xl">+</span>
             </div>`
     }
-  }
   }
 
 }
