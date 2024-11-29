@@ -10,20 +10,22 @@
 </head>
 <body class="w-full h-full">
 
-    <header class="w-full h-[100px] flex justify-between items-center px-20">
+    <header class="w-full h-[100px] flex justify-between items-center px-20 max-[620px]:px-10">
         <a href="../index.html"><h1 class="text-4xl font-bold text-yellowColor cursor-pointer">FUT<i class="fa-solid fa-futbol"></i></h1></a>
-        <ul class="flex gap-10 text-lg font-semibold">
+        <ul id="getMenu" class="flex gap-10 text-lg font-semibold max-[620px]:absolute max-[620px]:w-full max-[620px]:h-[100vh] max-[620px]:flex-col max-[620px]:justify-center max-[620px]:items-center max-[620px]:bg-[#2a2a30] max-[620px]:top-0 max-[620px]:right-0 max-[620px]:z-50 max-[620px]:w-0 max-[620px]:overflow-hidden transition-all duration-150">
+            <li id="closeMenu" class="absolute top-10 text-yellowColor  left-10 cursor-pointer hidden max-[620px]:block"><i class="fa-solid fa-xmark  text-2xl"></i></li>
             <li><a href="../index.html" class="hover:text-yellowColor duration-300 text-white">Home</a></li>
             <li><a href="gestion.html" class="hover:text-yellowColor duration-300 text-white">Gestion</a></li>
-            <li><a href="gestion.html" class="hover:text-yellowColor duration-300 text-white">Contact</a></li>
+            <li><a href="#contact" class="hover:text-yellowColor duration-300 text-white">Contact</a></li>
         </ul>
+        <i id="openMenu" class="fa-solid fa-bars text-white text-2xl" style="display: none;"></i>
     </header>
 
 
-    <aside class="max-w-[300px] w-full h-full absolute right-14 top-[150px] z-10 max-xl:hidden">
-
+    <aside class="max-w-[300px] w-full h-full absolute right-20 top-[150px] z-10 max-xl:bg-black max-xl:max-w-[600px] max-xl:fixed max-xl:top-0 max-xl:right-0 block max-xl:hidden">
+        <span id="closeAffichePlayers" class="text-orangeColor relative top-5 left-5 hidden max-xl:block"><i class="fa-solid fa-xmark  text-2xl "></i></span>
         <div class="topAjoute h-[10%] flex justify-center items-center mb-5">
-            <button id="openAjoutSection" class="w-[160px] h-[45px] bg-transparent text-orangeColor text-lg font-semibold rounded-[5px] border-2 border-orangeColor hover:bg-orangeColor hover:text-black duration-150">ADD Player</button>
+            <button class="w-[160px] h-[45px] bg-transparent text-orangeColor text-lg font-semibold rounded-[5px] border-2 border-orangeColor hover:bg-orangeColor hover:text-black duration-150 openAjoutSection">ADD Player</button>
         </div>
 
         <div class="searchSection w-full h-[6%] flex justify-center items-center ">
@@ -52,20 +54,27 @@
         </div>
 
     </aside>
+
     
 
-    <div class="planning pl-[30vw] mt-[60px] max-xl:pl-0 max-xl:flex max-xl:items-center max-xl:flex-col">
+    <div class="planning pl-[30vw] mt-[60px] max-xl:pl-0 max-xl:flex max-xl:items-center max-xl:flex-col mb-[60px]">
         <h2 class="text-2xl text-yellowColor mb-5">Select Formation</h2>
         <select id="getPlanningSelect" class="w-[180px] h-[40px] rounded-[15px] outline-none border-none pl-4">
             <option value="4-3-3">4-3-3</option>
             <option value="4-4-2">4-4-2</option>
         </select>
+        
     </div>
 
 
-    <section class="terrain w-[75vw] h-[70vw] my-10 bg-[length:100%_100%] bg-no-repeat bg-center grid grid-cols-[150px_150px_150px_150px_150px] grid-rows-[180px_180px_180px_180px] gap-1 max-xl:w-[100vw] justify-center content-center max-lg:grid-cols-[100px_100px_100px_100px_100px] max-lg:grid-rows-[130px_130px_130px_130px] max-lg:gap-[3vw] max-md:grid-cols-[85px_85px_85px_85px_85px] max-md:grid-rows-[110px_110px_110px_110px] max-md:bg-[length:120%_100%]  max-sm:grid-cols-[75px_75px_75px_75px_75px] max-sm:grid-rows-[95px_95px_95px_95px] max-sm:gap-12 max-sm:overflow-x-auto max-[620px]:w-[120vw] max-sm:h-[100vw] max-[420px]:h-[150vw] max-[600px]:gap-5 max-[480px]:gap-2">
+    <div class="ajouteMobile justify-center hidden max-xl:flex">
+        <button  class="w-[160px] h-[45px] bg-transparent text-orangeColor text-lg font-semibold rounded-[5px] border-2 border-orangeColor hover:bg-orangeColor hover:text-black duration-150 openAjoutSection">Open Player</button>
+    </div>
 
-        <div class="card flex justify-center items-center text-[#3b3419] translate-y-[-20px]">
+
+    <section class="terrain w-[75vw] h-[70vw] my-10 bg-[length:100%_100%] bg-no-repeat bg-center grid grid-cols-[150px_150px_150px_150px_150px] grid-rows-[180px_180px_180px_180px] gap-1 max-xl:w-[100vw] justify-center content-center max-lg:grid-cols-[100px_100px_100px_100px_100px] max-lg:grid-rows-[130px_130px_130px_130px] max-lg:gap-[3vw] max-md:grid-cols-[85px_85px_85px_85px_85px] max-md:grid-rows-[110px_110px_110px_110px] max-md:bg-[length:120%_100%]  max-sm:grid-cols-[73px_73px_73px_73px_73px] max-sm:grid-rows-[90px_90px_90px_90px] max-sm:gap-12 max-[620px]:w-[100%] max-[620px]:overflow-x-auto max-sm:h-[100vw] max-[420px]:h-[150vw] max-[600px]:gap-5 max-[480px]:gap-2">
+
+        <div class="card flex justify-center items-center text-[#3b3419] translate-y-[-20px] max-[480px]:translate-x-[30px]">
             <div class="h-full w-full bg-[url(../img/badge_gold.webp)] bg-[length:100%_115%] bg-no-repeat bg-center flex justify-center items-center ">
                 <span class="text-6xl">+</span>
             </div>
@@ -76,83 +85,83 @@
                 <span class="text-6xl">+</span>
             </div>
         </div>
+        <div class="card flex justify-center items-center text-[#3b3419] translate-y-[20px] max-[480px]:translate-y-[10px]">
+            <div class="h-full w-full bg-[url(../img/badge_gold.webp)] bg-[length:100%_115%] bg-no-repeat bg-center flex justify-center items-center ">
+                <span class="text-6xl">+</span>
+            </div>
+        </div>
+        <div class="card flex justify-center items-center text-[#3b3419]">
+            <div class="h-full w-full bg-[url(../img/badge_gold.webp)] bg-[length:100%_115%] bg-no-repeat bg-center flex justify-center items-center ">
+                <span class="text-6xl">+</span>
+            </div>
+        </div>
+        <div class="card flex justify-center items-center text-[#3b3419] translate-y-[-20px] max-[480px]:translate-x-[-30px]">
+            <div class="h-full w-full bg-[url(../img/badge_gold.webp)] bg-[length:100%_115%] bg-no-repeat bg-center flex justify-center items-center ">
+                <span class="text-6xl">+</span>
+            </div>
+        </div>
+        <div class="card flex justify-center items-center text-[#3b3419]  translate-y-[-20px] max-[480px]:translate-x-[30px]">
+            <div class="h-full w-full bg-[url(../img/badge_gold.webp)] bg-[length:100%_115%] bg-no-repeat bg-center flex justify-center items-center ">
+                <span class="text-6xl">+</span>
+            </div>
+        </div>
+        <div class="card flex justify-center items-center text-[#3b3419] translate-x-[50px] max-[480px]:translate-x-[40px]">
+            <div class="h-full w-full bg-[url(../img/badge_gold.webp)] bg-[length:100%_115%] bg-no-repeat bg-center flex justify-center items-center ">
+                <span class="text-6xl">+</span>
+            </div>
+        </div>
+        <div class="card flex justify-center items-center text-[#3b3419] translate-y-[20px] max-[480px]:translate-y-[10px]">
+            <div class="h-full w-full bg-[url(../img/badge_gold.webp)] bg-[length:100%_115%] bg-no-repeat bg-center flex justify-center items-center ">
+                <span class="text-6xl">+</span>
+            </div>
+        </div>
+        <div class="card flex justify-center items-center text-[#3b3419] translate-x-[-50px] max-[480px]:translate-x-[-30px]">
+            <div class="h-full w-full bg-[url(../img/badge_gold.webp)] bg-[length:100%_115%] bg-no-repeat bg-center flex justify-center items-center ">
+                <span class="text-6xl">+</span>
+            </div>
+        </div>
+        <div class="card flex justify-center items-center text-[#3b3419] translate-y-[-20px] max-[480px]:translate-x-[-30px]">
+            <div class="h-full w-full bg-[url(../img/badge_gold.webp)] bg-[length:100%_115%] bg-no-repeat bg-center flex justify-center items-center ">
+                <span class="text-6xl">+</span>
+            </div>
+        </div>
+        <div class="card flex justify-center items-center text-[#3b3419] translate-y-[-20px] max-[480px]:translate-x-[30px]">
+            <div class="h-full w-full bg-[url(../img/badge_gold.webp)] bg-[length:100%_115%] bg-no-repeat bg-center flex justify-center items-center ">
+                <span class="text-6xl">+</span>
+            </div>
+        </div>
+        <div class="card flex justify-center items-center text-[#3b3419] translate-x-[50px] max-[480px]:translate-x-[40px]">
+            <div class="h-full w-full bg-[url(../img/badge_gold.webp)] bg-[length:100%_115%] bg-no-repeat bg-center flex justify-center items-center ">
+                <span class="text-6xl">+</span>
+            </div>
+        </div>
         <div class="card flex justify-center items-center text-[#3b3419] translate-y-[20px]">
             <div class="h-full w-full bg-[url(../img/badge_gold.webp)] bg-[length:100%_115%] bg-no-repeat bg-center flex justify-center items-center ">
                 <span class="text-6xl">+</span>
             </div>
         </div>
-        <div class="card flex justify-center items-center text-[#3b3419]">
+        <div class="card flex justify-center items-center text-[#3b3419] translate-x-[-50px] max-[480px]:translate-x-[-40px]">
             <div class="h-full w-full bg-[url(../img/badge_gold.webp)] bg-[length:100%_115%] bg-no-repeat bg-center flex justify-center items-center ">
                 <span class="text-6xl">+</span>
             </div>
         </div>
-        <div class="card flex justify-center items-center text-[#3b3419] translate-y-[-20px]">
+        <div class="card flex justify-center items-center text-[#3b3419] translate-y-[-20px] max-[480px]:translate-x-[-30px]">
             <div class="h-full w-full bg-[url(../img/badge_gold.webp)] bg-[length:100%_115%] bg-no-repeat bg-center flex justify-center items-center ">
                 <span class="text-6xl">+</span>
             </div>
         </div>
-        <div class="card flex justify-center items-center text-[#3b3419]  translate-y-[-20px]">
+        <div class="flex justify-center items-center text-[#3b3419]">
+        </div>
+        <div class="flex justify-center items-center text-[#3b3419]">
+        </div>
+        <div class="card flex justify-center items-center text-[#3b3419] translate-y-[10px] max-[480px]:translate-y-[-10px]">
             <div class="h-full w-full bg-[url(../img/badge_gold.webp)] bg-[length:100%_115%] bg-no-repeat bg-center flex justify-center items-center ">
                 <span class="text-6xl">+</span>
             </div>
         </div>
-        <div class="card flex justify-center items-center text-[#3b3419] translate-x-[50px]">
-            <div class="h-full w-full bg-[url(../img/badge_gold.webp)] bg-[length:100%_115%] bg-no-repeat bg-center flex justify-center items-center ">
-                <span class="text-6xl">+</span>
-            </div>
+        <div class="flex justify-center items-center text-[#3b3419]">
         </div>
-        <div class="card flex justify-center items-center text-[#3b3419] translate-y-[20px]">
-            <div class="h-full w-full bg-[url(../img/badge_gold.webp)] bg-[length:100%_115%] bg-no-repeat bg-center flex justify-center items-center ">
-                <span class="text-6xl">+</span>
-            </div>
-        </div>
-        <div class="card flex justify-center items-center text-[#3b3419] translate-x-[-50px]">
-            <div class="h-full w-full bg-[url(../img/badge_gold.webp)] bg-[length:100%_115%] bg-no-repeat bg-center flex justify-center items-center ">
-                <span class="text-6xl">+</span>
-            </div>
-        </div>
-        <div class="card flex justify-center items-center text-[#3b3419] translate-y-[-20px]">
-            <div class="h-full w-full bg-[url(../img/badge_gold.webp)] bg-[length:100%_115%] bg-no-repeat bg-center flex justify-center items-center ">
-                <span class="text-6xl">+</span>
-            </div>
-        </div>
-        <div class="card flex justify-center items-center text-[#3b3419] translate-y-[-20px]">
-            <div class="h-full w-full bg-[url(../img/badge_gold.webp)] bg-[length:100%_115%] bg-no-repeat bg-center flex justify-center items-center ">
-                <span class="text-6xl">+</span>
-            </div>
-        </div>
-        <div class="card flex justify-center items-center text-[#3b3419] translate-x-[50px]">
-            <div class="h-full w-full bg-[url(../img/badge_gold.webp)] bg-[length:100%_115%] bg-no-repeat bg-center flex justify-center items-center ">
-                <span class="text-6xl">+</span>
-            </div>
-        </div>
-        <div class="card flex justify-center items-center text-[#3b3419] translate-y-[20px] ">
-            <div class="h-full w-full bg-[url(../img/badge_gold.webp)] bg-[length:100%_115%] bg-no-repeat bg-center flex justify-center items-center ">
-                <span class="text-6xl">+</span>
-            </div>
-        </div>
-        <div class="card flex justify-center items-center text-[#3b3419] translate-x-[-50px]">
-            <div class="h-full w-full bg-[url(../img/badge_gold.webp)] bg-[length:100%_115%] bg-no-repeat bg-center flex justify-center items-center ">
-                <span class="text-6xl">+</span>
-            </div>
-        </div>
-        <div class="card flex justify-center items-center text-[#3b3419] translate-y-[-20px]">
-            <div class="h-full w-full bg-[url(../img/badge_gold.webp)] bg-[length:100%_115%] bg-no-repeat bg-center flex justify-center items-center ">
-                <span class="text-6xl">+</span>
-            </div>
-        </div>
-        <div class="card flex justify-center items-center text-[#3b3419]">
-        </div>
-        <div class="card flex justify-center items-center text-[#3b3419]">
-        </div>
-        <div class="card flex justify-center items-center text-[#3b3419] translate-y-[10px]">
-            <div class="h-full w-full bg-[url(../img/badge_gold.webp)] bg-[length:100%_115%] bg-no-repeat bg-center flex justify-center items-center ">
-                <span class="text-6xl">+</span>
-            </div>
-        </div>
-        <div class="card flex justify-center items-center text-[#3b3419]">
-        </div>
-        <div class="card flex justify-center items-center text-[#3b3419]">
+        <div class="flex justify-center items-center text-[#3b3419]">
         </div>
         <!-- <div class="flex justify-center items-center text-[#3b3419] translate-y-[10px]">
             <div class="h-full w-full bg-[url(../img/badge_gold.webp)] bg-[length:100%_115%] bg-no-repeat bg-center">
@@ -203,8 +212,8 @@
 
 
 
-    <section class="changementSection w-full h-full min-h-[400px] flex justify-center mb-20 cursor-pointer">
-        <div class="changements w-[90%] bg-[#2a2a30] rounded-[10px]">
+    <section class="changementSection w-full h-full min-h-[400px] flex justify-center mb-20 cursor-pointer max-h-[600px]">
+        <div class="changements w-[90%] bg-[#2a2a30] rounded-[10px] overflow-y-auto">
             <div class="topChangement w-full h-[80px] flex items-center pl-10 border-b-2 border-yellowColor">
                 <h2 class="text-2xl text-yellowColor">Changement</h2>
             </div>
@@ -265,8 +274,8 @@
         <span id="closeAjoutSection" class="absolute left-10 top-10 text-yellowColor text-4xl w-[50px] h-[50px] rounded-[50%] bg-[#161616] flex justify-center items-center cursor-pointer"><i class="fa-solid fa-xmark"></i></span>
         <div class="ajouteFormule w-full max-w-[450px] h-[550px] max-h-[80vh] bg-[#282828] rounded-[5px] flex flex-col items-center justify-center gap-5 px-7">
             <h2 id="titleSection" class="text-yellowColor text-xl mb-4">Add Player</h2>
-            <input id="getNameElement" type="text" placeholder="Full Name" class="w-[90%] h-[35px] pl-4 rounded-[5px] border-black border-2 bg-[#1f1f1fb5] outline-none text-white focus:border-yellowColor">
-            <input id="getImageElement" type="text" placeholder="Profile image src" class="w-[90%] h-[35px] pl-4 rounded-[5px] border-black border-2 bg-[#1f1f1fb5] outline-none text-white focus:border-yellowColor">
+            <input id="getNameElement" type="text" placeholder="Full Name" class="w-[90%] h-[35px] pl-4 rounded-[5px] border-black border-[2px] bg-[#1f1f1fb5] outline-none text-white focus:border-yellowColor">
+            <input id="getImageElement" type="text" placeholder="Profile image src" class="w-[90%] h-[35px] pl-4 rounded-[5px] border-black border-[2px] bg-[#1f1f1fb5] outline-none text-white focus:border-yellowColor">
             <div class="w-full flex justify-center gap-2">
                 <select id="getPositionElement" required class="h-[30px] w-[33%] rounded-[5px] outline-none border-black border-[2px]">
                     <option disabled selected>Position</option>
@@ -307,25 +316,25 @@
             </div>
             <div class="skills flex gap-5 flex-wrap w-[80%]">
                 <div class="skill flex items-center gap-2">
-                    <h5 class="text-white">RAT</h5> <input id="getRatElement" type="number" value="10" class="w-[45px] h-[40px] pl-1 rounded-[5px] border-black border-2 bg-[#1f1f1fb5] outline-none text-white focus:border-yellowColor">
+                    <h5 class="text-white">RAT</h5> <input id="getRatElement" type="number" value="10" class="w-[45px] h-[40px] pl-1 rounded-[5px] border-black border-[2px] bg-[#1f1f1fb5] outline-none text-white focus:border-yellowColor">
                 </div>
                 <div class="skill flex items-center gap-2">
-                    <h5 class="text-white">PAC</h5> <input id="getPacElement" type="number" value="10" class="w-[45px] h-[40px] pl-1 rounded-[5px] border-black border-2 bg-[#1f1f1fb5] outline-none text-white focus:border-yellowColor">
+                    <h5 id="getPac" class="text-white">PAC</h5> <input id="getPacElement" type="number" value="10" class="w-[45px] h-[40px] pl-1 rounded-[5px] border-black border-[2px] bg-[#1f1f1fb5] outline-none text-white focus:border-yellowColor">
                 </div>
                 <div class="skill flex items-center gap-2">
-                    <h5 class="text-white">SHO</h5> <input id="getShoElement" type="number" value="10" class="w-[45px] h-[40px] pl-1 rounded-[5px] border-black border-2 bg-[#1f1f1fb5] outline-none text-white focus:border-yellowColor">
+                    <h5 id="getSho" class="text-white">SHO</h5> <input id="getShoElement" type="number" value="10" class="w-[45px] h-[40px] pl-1 rounded-[5px] border-black border-[2px] bg-[#1f1f1fb5] outline-none text-white focus:border-yellowColor">
                 </div>
                 <div class="skill flex items-center gap-2">
-                    <h5 class="text-white">PAS</h5> <input id="getPasElement" type="number" value="10" class="w-[45px] h-[40px] pl-1 rounded-[5px] border-black border-2 bg-[#1f1f1fb5] outline-none text-white focus:border-yellowColor">
+                    <h5 id="getPas" class="text-white">PAS</h5> <input id="getPasElement" type="number" value="10" class="w-[45px] h-[40px] pl-1 rounded-[5px] border-black border-[2px] bg-[#1f1f1fb5] outline-none text-white focus:border-yellowColor">
                 </div>
                 <div class="skill flex items-center gap-2">
-                    <h5 class="text-white">DRI</h5> <input id="getDriElement" type="number" value="10" class="w-[45px] h-[40px] pl-1 rounded-[5px] border-black border-2 bg-[#1f1f1fb5] outline-none text-white focus:border-yellowColor">
+                    <h5 id="getDri" class="text-white">DRI</h5> <input id="getDriElement" type="number" value="10" class="w-[45px] h-[40px] pl-1 rounded-[5px] border-black border-[2px] bg-[#1f1f1fb5] outline-none text-white focus:border-yellowColor">
                 </div>
                 <div class="skill flex items-center gap-2">
-                    <h5 class="text-white">DEF</h5> <input id="getDefElement" type="number" value="10" class="w-[45px] h-[40px] pl-1 rounded-[5px] border-black border-2 bg-[#1f1f1fb5] outline-none text-white focus:border-yellowColor">
+                    <h5 id="getDef" class="text-white">DEF</h5> <input id="getDefElement" type="number" value="10" class="w-[45px] h-[40px] pl-1 rounded-[5px] border-black border-[2px] bg-[#1f1f1fb5] outline-none text-white focus:border-yellowColor">
                 </div>
                 <div class="skill flex items-center gap-2">
-                    <h5 class="text-white">PHY</h5> <input id="getPhyElement" type="number" value="10" class="w-[45px] h-[40px] pl-1 rounded-[5px] border-black border-2 bg-[#1f1f1fb5] outline-none text-white focus:border-yellowColor">
+                    <h5 id="getPhy" class="text-white">PHY</h5> <input id="getPhyElement" type="number" value="10" class="w-[45px] h-[40px] pl-1 rounded-[5px] border-black border-[2px] bg-[#1f1f1fb5] outline-none text-white focus:border-yellowColor">
                 </div>
             </div>
             <button id="buttonSubmit" class="w-[150px] h-[45px] bg-orangeColor text-md font-semibold rounded-[10px]">ADD Player</button>
@@ -388,6 +397,42 @@
             </div>
         </div>
     </div>
+
+    <footer id="contact" class="w-full min-h-[450px] bg-[#212121] flex flex-col items-center justify-between text-white">
+        <div class="footerTop w-[90%] h-[100px] border-b-2 border-yellowColor flex items-center justify-between px-4">
+            <a href="../index.html"><h1 class="text-4xl font-bold text-yellowColor cursor-pointer">FUT<i class="fa-solid fa-futbol"></i></h1></a>
+            <div class="socialMedia flex gap-5 text-3xl text-textSpecial max-sm:text-xl">
+                <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+            </div>
+        </div>
+
+        <div class="footerContent w-[90%] grid grid-cols-3 grid-rows-[250px] max-md:grid-cols-2 max-md:grid-rows-[250px 250px] max-sm:grid-cols-2 max-sm:grid-rows-[250px 250px 250px] max-[480px]:grid-cols-1">
+            <ul class="flex flex-col p-10 gap-5 items-center">
+                <li class="text-xl font-bold text-yellowColor">Liens utiles</li>
+                <li><a href="#">Accueil</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">FAQ</a></li>
+            </ul>
+            <ul  class="flex flex-col p-10 gap-5 items-center">
+                <li class="text-xl font-bold text-yellowColor">Nos servicess</li>
+                <li>Gestion des tâches</li>
+                <li>Organisation du temps</li>
+                <li>Articles et conseils</li>
+            </ul>
+            <ul  class="flex flex-col p-10 gap-5 items-center">
+                <li class="text-xl font-bold text-yellowColor">À propos</li>
+                <li>Description courte</li>
+                <li>Qui sommes-nous</li>
+            </ul>
+        </div>
+
+        <div class="bottomFooter w-full h-20 flex justify-center items-center">
+            <h5>© 2024 Wassim Yazza. All rights reserved</h5>
+        </div>
+    </footer>
 
     <script src="../js/script.js"></script>
 </body>

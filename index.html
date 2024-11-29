@@ -4,10 +4,75 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FUT - Home</title>
+    <link rel="stylesheet" href="css/output.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 </head>
 <body>
 
+    <section class="home h-[100vh]">
+
+        <header class="w-full h-[15vh] max-h-[100px] flex justify-between items-center px-20 max-[620px]:px-10">
+            <a href="../index.html"><h1 class="text-4xl font-bold text-yellowColor cursor-pointer">FUT<i class="fa-solid fa-futbol"></i></h1></a>
+            <ul id="getMenu" class="flex gap-10 text-lg font-semibold max-[620px]:absolute max-[620px]:w-full max-[620px]:h-[100vh] max-[620px]:flex-col max-[620px]:justify-center max-[620px]:items-center max-[620px]:bg-[#2a2a30] max-[620px]:top-0 max-[620px]:right-0 max-[620px]:z-50 max-[620px]:w-0 max-[620px]:overflow-hidden transition-all duration-150">
+                <li id="closeMenu" class="absolute top-10 text-yellowColor  left-10 cursor-pointer hidden max-[620px]:block"><i class="fa-solid fa-xmark  text-2xl"></i></li>
+                <li><a href="../index.html" class="hover:text-yellowColor duration-300 text-white">Home</a></li>
+                <li><a href="pages/gestion.html" class="hover:text-yellowColor duration-300 text-white">Gestion</a></li>
+                <li><a href="#contact" class="hover:text-yellowColor duration-300 text-white">Contact</a></li>
+            </ul>
+            <i id="openMenu" class="fa-solid fa-bars text-white text-2xl" style="display: none;"></i>
+        </header>
+        <div class="w-full h-[85vh] flex text-white">
+            <div class="content w-1/2 h-full flex flex-col justify-center pl-20 gap-10 max-lg:w-full max-lg:items-center  max-lg:pl-0">
+                <h3 class="text-lg"><span>Welcome to,</span></h3>
+                <h1 class="text-6xl font-bold  max-lg:text-center max-sm:text-4xl"><span>FUT</span> Website</h1>
+                <p class="text-base max-lg:text-center max-lg:w-[80%]  max-lg:text-sm">Our website offers a comprehensive and user-friendly platform designed to simplify the process of managing, organizing, and building your dream football team, ensuring an enjoyable and efficient experience for all users.</p>
+                <a href="pages/gestion.html" class="w-[200px] h-[45px] bg-orangeColor flex justify-center items-center rounded-[17px] font-bold text-lg">Start now for free!</a>
+            </div>
+            <div class="img w-1/2 h-full flex justify-center items-center max-lg:hidden">
+                <img class="w-[60%] h-[60%]" src="img/player.svg" alt="To Do image">
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact" class="w-full min-h-[450px] bg-[#212121] flex flex-col items-center justify-between text-white">
+        <div class="footerTop w-[90%] h-[100px] border-b-2 border-yellowColor flex items-center justify-between px-4">
+            <a href="../index.html"><h1 class="text-4xl font-bold text-yellowColor cursor-pointer">FUT<i class="fa-solid fa-futbol"></i></h1></a>
+            <div class="socialMedia flex gap-5 text-3xl text-textSpecial max-sm:text-xl">
+                <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+            </div>
+        </div>
+
+        <div class="footerContent w-[90%] grid grid-cols-3 grid-rows-[250px] max-md:grid-cols-2 max-md:grid-rows-[250px 250px] max-sm:grid-cols-2 max-sm:grid-rows-[250px 250px 250px] max-[480px]:grid-cols-1">
+            <ul class="flex flex-col p-10 gap-5 items-center">
+                <li class="text-xl font-bold text-yellowColor">Liens utiles</li>
+                <li><a href="#">Accueil</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">FAQ</a></li>
+            </ul>
+            <ul  class="flex flex-col p-10 gap-5 items-center">
+                <li class="text-xl font-bold text-yellowColor">Nos servicess</li>
+                <li>Gestion des tâches</li>
+                <li>Organisation du temps</li>
+                <li>Articles et conseils</li>
+            </ul>
+            <ul  class="flex flex-col p-10 gap-5 items-center">
+                <li class="text-xl font-bold text-yellowColor">À propos</li>
+                <li>Description courte</li>
+                <li>Qui sommes-nous</li>
+            </ul>
+        </div>
+
+        <div class="bottomFooter w-full h-20 flex justify-center items-center">
+            <h5>© 2024 Wassim Yazza. All rights reserved</h5>
+        </div>
+    </footer>
     
     
+    <script src="js/script.js"></script>
 </body>
 </html>

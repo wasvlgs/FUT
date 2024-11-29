@@ -452,13 +452,54 @@ let getPlanningSelect = document.getElementById("getPlanningSelect");
 getPlanningSelect.value = "4-3-3";
 
 
+
+
+function updateStorage(){
+  localStorage.setItem("players", JSON.stringify(players));
+  localStorage.setItem("playersActive", JSON.stringify(playersActive));
+}
+
+
+
+
+
+
+
+
+// ==================== Burger menu ================================
+
+function burgerMenu(){
+  let getMenu = document.getElementById("getMenu");
+  let closeMenu = document.getElementById("closeMenu");
+  let openMenu = document.getElementById("openMenu");
+
+
+  openMenu.onclick = ()=>{
+    getMenu.style.width = "100%"
+  }
+
+  closeMenu.onclick = ()=>{
+    getMenu.style.width = "0%"
+  }
+  
+}
+
+
 // ************************* Call Functions ****************************
 // *********************************************************************
 // **********************************************************************
 
 document.addEventListener("DOMContentLoaded",()=>{
 
+  if(localStorage.getItem("players")){
+    players = JSON.parse(localStorage.getItem("players"));
+  }
+  if(localStorage.getItem("playersActive")){
+    playersActive = JSON.parse(localStorage.getItem("playersActive"));
+  }
 
+
+    burgerMenu();
     afficheListPlayers();
     afficheListChangement();
     teamPlanning();
@@ -466,7 +507,9 @@ document.addEventListener("DOMContentLoaded",()=>{
     ajoutePlayer();
     searchFunction();
     editFunction();
+    afficherCardPlayers();
 
+    console.log(playersActive)
 })
 
 
@@ -482,7 +525,7 @@ function afficheListPlayers(){
 
     for(let i = 0; i < players.length; i++){
         listElement.innerHTML += `
-        <div draggable="true" class="player w-full min-h-[60px] bg-[#2a2a30] flex items-center justify-between rounded-[5px]">
+        <div draggable="true" class="player w-full min-h-[60px] bg-[#2a2a30] flex items-center justify-between rounded-[5px] cursor-pointer">
     
                 <div onclick="selectPosition(${players[i].id})" class="flex items-center w-[80%] pl-5 cursor-pointer">
                         <div class="profileImage w-[40px] h-[40px] rounded-[50%] bg-[#bfbfbf] overflow-hidden">
@@ -495,7 +538,7 @@ function afficheListPlayers(){
                 </div>
 
                 <div class="w-[20%] h-full flex justify-center items-center">
-                    <i onclick="removePlayer(${i})" class="fa-solid fa-trash text-xl text-red-600 cursor-pointer"></i>
+                    <i onclick="removePlayer(${players[i].id})" class="fa-solid fa-trash text-xl text-red-600 cursor-pointer"></i>
                 </div>
             </div>
 
@@ -508,19 +551,42 @@ function afficheListPlayers(){
 
 function afficheListChangement(){
   let changementElement = document.getElementById("changementElement");
-  let answer = true;
+  let response = true;
   changementElement.innerHTML = '';
+
+  let getPac;
+    let getSho;
+    let getPas;
+    let getDri;
+    let getDef;
+    let getPhy;
 
   for(let i = 0; i < players.length; i++){
     for(let j = 0; j < playersActive.length; j++){
       if(players[i].id == playersActive[j].id){
-        answer = false;
+        response = false;
       }else{
-        answer = true;
+        response = true;
       }
     }
-      if(answer === true){changementElement.innerHTML += `
-      <div  onclick="openEditSection(${i})" draggable="true" class="changement w-full max-w-[200px] h-[280px] bg-[#1a1a1a] rounded-[15px] text-white shadow-[0px_0px_3px_-1px_yellow]">
+      if(response == true){
+        if(players[i].position === "GK"){
+          getPac = "DIV";
+          getSho = "HAN";
+          getPas = "KIC";
+          getDri = "REF";
+          getDef = "SPD";
+          getPhy = "POS";
+        }else{
+          getPac = "PAC";
+          getSho = "SHO";
+          getPas = "PAS";
+          getDri = "DRI";
+          getDef = "DEF";
+          getPhy = "PHY";
+        }
+        changementElement.innerHTML += `
+      <div  onclick="openEditSection(${players[i].id})" draggable="true" class="changement w-full max-w-[200px] h-[280px] bg-[#1a1a1a] rounded-[15px] text-white shadow-[0px_0px_3px_-1px_yellow]">
 
                     <div class="topCardChangement h-[35%] w-full flex justify-center items-center">
                         <div class="profileChangement w-[80px] h-[80px] rounded-[50%] bg-[#6c6c6c] flex justify-center items-center overflow-hidden">
@@ -534,27 +600,27 @@ function afficheListChangement(){
                         </div>
                         <div class="competanceCard p-2 h-[60%] justify-center grid grid-cols-[auto_auto_auto] grid-rows-[auto_auto] gap-x-5">
                             <div>
-                                <h5 class="text-[0.7rem] font-medium text-yellowColor mb-[-4px]">PAC</h5>
+                                <h5 class="text-[0.7rem] font-medium text-yellowColor mb-[-4px]">${getPac}</h5>
                                 <h6 class="text-[1rem] font-semibold">${players[i].pace}</h6>
                             </div>
                             <div>
-                                <h5 class="text-[0.7rem] font-medium text-yellowColor mb-[-4px]">SHO</h5>
+                                <h5 class="text-[0.7rem] font-medium text-yellowColor mb-[-4px]">${getSho}</h5>
                                 <h6 class="text-[1rem] font-semibold">${players[i].shooting}</h6>
                             </div>
                             <div>
-                                <h5 class="text-[0.7rem] font-medium text-yellowColor mb-[-4px]">PAS</h5>
+                                <h5 class="text-[0.7rem] font-medium text-yellowColor mb-[-4px]">${getPas}</h5>
                                 <h6 class="text-[1rem] font-semibold">${players[i].passing}</h6>
                             </div>
                             <div>
-                                <h5 class="text-[0.7rem] font-medium text-yellowColor mb-[-4px]">DRI</h5>
+                                <h5 class="text-[0.7rem] font-medium text-yellowColor mb-[-4px]">${getDri}</h5>
                                 <h6 class="text-[1rem] font-semibold">${players[i].dribbling}</h6>
                             </div>
                             <div>
-                                <h5 class="text-[0.7rem] font-medium text-yellowColor mb-[-4px]">DEF</h5>
+                                <h5 class="text-[0.7rem] font-medium text-yellowColor mb-[-4px]">${getDef}</h5>
                                 <h6 class="text-[1rem] font-semibold">${players[i].defending}</h6>
                             </div>
                             <div>
-                                <h5 class="text-[0.7rem] font-medium text-yellowColor mb-[-4px]">PHY</h5>
+                                <h5 class="text-[0.7rem] font-medium text-yellowColor mb-[-4px]">${getPhy}</h5>
                                 <h6 class="text-[1rem] font-semibold">${players[i].physical}</h6>
                             </div>
                         </div>
@@ -644,15 +710,22 @@ function teamPlanning(){
 function popUpAjoutSection(){
   let ajouteSection = document.getElementById("ajouteSection");
   let addPlayerTeamSection = document.getElementById("addPlayerTeamSection");
-  let openAjoutSection = document.getElementById("openAjoutSection");
+  let openAjoutSection = document.getElementsByClassName("openAjoutSection");
   let closeAjoutSection = document.getElementById("closeAjoutSection");
   let closeAddPlayerTeam = document.getElementById("closeAddPlayerTeam");
+  let closeAffichePlayers = document.getElementById("closeAffichePlayers");
 
-  openAjoutSection.onclick = ()=>{
+  openAjoutSection[0].onclick = ()=>{
     ajouteSection.style.display = "flex";
   }
-  closeAddPlayerTeam.onclick = ()=>{
-    addPlayerTeamSection.style.display = "none";
+  openAjoutSection[1].onclick = ()=>{
+    document.querySelector("aside").style.display = "block";
+  }
+  openAjoutSection[1].onclick = ()=>{
+    document.querySelector("aside").style.display = "block";
+  }
+  closeAffichePlayers.onclick = ()=>{
+    document.querySelector("aside").style.display = "none";
   }
   closeAjoutSection.onclick = ()=>{
     ajouteSection.style.display = "none";
@@ -699,6 +772,20 @@ function popUpAjoutSection(){
 
 
 function ajoutePlayer(){
+
+
+
+
+
+  let getPac = document.getElementById("getPac");
+  let getSho = document.getElementById("getSho");
+  let getPas = document.getElementById("getPas");
+  let getDri = document.getElementById("getDri");
+  let getDef = document.getElementById("getDef");
+  let getPhy = document.getElementById("getPhy");
+
+
+
   let getNameElement = document.getElementById("getNameElement");
   let getImageElement = document.getElementById("getImageElement");
   let getPositionElement = document.getElementById("getPositionElement");
@@ -715,10 +802,26 @@ function ajoutePlayer(){
   let buttonSubmit = document.getElementById("buttonSubmit");
 
 
-  buttonSubmit.addEventListener("click",()=>{
-    
-    if(!buttonSubmit.value){
+  getPositionElement.onchange = ()=>{
+    if(getPositionElement.value === "GK"){
+      getPac.innerText = "DIV";
+      getSho.innerText = "HAN";
+      getPas.innerText = "KIC";
+      getDri.innerText = "REF";
+      getDef.innerText = "SPD";
+      getPhy.innerText = "POS";
+    }else{
+      getPac.innerText = "PAC";
+      getSho.innerText = "SHO";
+      getPas.innerText = "PAS";
+      getDri.innerText = "DRI";
+      getDef.innerText = "DEF";
+      getPhy.innerText = "PHY";
+    }
+  }
 
+
+  buttonSubmit.addEventListener("click",()=>{
     getNameElement.style.border = "2px solid black";
     getImageElement.style.border = "2px solid black";
     getPositionElement.style.border = "2px solid black";
@@ -731,6 +834,9 @@ function ajoutePlayer(){
     getDriElement.style.border = "2px solid black";
     getDefElement.style.border = "2px solid black";
     getPhyElement.style.border = "2px solid black";
+
+    if(!buttonSubmit.value){
+
       if(getNameElement.value.trim() == ""){
         getNameElement.style.border = "2px solid red";
       }
@@ -825,7 +931,15 @@ function ajoutePlayer(){
           return;
         }
 
-        players.push({
+        let response = true;
+
+        for(let j = 0; j < players.length; j++){
+          if(players[j].name.toUpperCase() == getNameElement.value.toUpperCase()){
+            response = false;
+          }
+        }
+
+        if(response === true){players.push({
           "id": getID,
           "name": getNameElement.value,
           "photo": getImageElement.value,
@@ -842,12 +956,6 @@ function ajoutePlayer(){
           "defending": getDefElement.value,
           "physical": getPhyElement.value
         })
-
-        let ajouteSection = document.getElementById("ajouteSection");
-        ajouteSection.style.display = "none";
-        afficheListPlayers();
-        afficheListChangement();
-
         let addSuccess = document.getElementById("addSuccess");
         addSuccess.innerHTML = `<div class="w-full max-w-[400px] bg-[#1dbb1d] h-full rounded-[5px] border-4 border-[green] flex items-center pl-5">
           <h6 class="font-semibold text-white">Player has been added avec success</h6>
@@ -857,6 +965,25 @@ function ajoutePlayer(){
         setTimeout(()=>{
           addSuccess.style.display = "none";
         },2000)
+      }else{
+          let addSuccess = document.getElementById("addSuccess");
+            addSuccess.innerHTML = `<div class="w-full max-w-[400px] bg-[#c02b26] h-full rounded-[5px] border-4 border-[red] flex items-center pl-5">
+        <h6 class="font-semibold text-white">This player already exict</h6>
+    </div>`
+            addSuccess.style.display = "flex";
+
+            setTimeout(()=>{
+              addSuccess.style.display = "none";
+            },2000);
+        }
+
+        let ajouteSection = document.getElementById("ajouteSection");
+        ajouteSection.style.display = "none";
+        updateStorage();
+        afficheListPlayers();
+        afficheListChangement();
+
+        
 
       }
     }
@@ -894,19 +1021,58 @@ function searchFunction(){
 // ====================== Remove Player Function =====================
 
 
-function removePlayer(index){
+function removePlayer(id){
+  let indexPrincipe = 0;
+  let indexTeam = 0;
+
+  for(let i = 0; i < players.length; i++){
+    if(players[i].id == id){
+      indexPrincipe = i;
+    }
+  }
+  for(let j = 0; j < playersActive.length; j++){
+    if(players[j].id == id){
+      indexTeam = j;
+    }
+  }
   
-  players.splice(index,1);
+  players.splice(indexPrincipe,1);
+  playersActive.splice(indexTeam,1);
+  let addSuccess = document.getElementById("addSuccess");
+        addSuccess.innerHTML = `<div class="w-full max-w-[400px] bg-[#1dbb1d] h-full rounded-[5px] border-4 border-[green] flex items-center pl-5">
+          <h6 class="font-semibold text-white">Player removed avec success</h6>
+      </div>`
+        addSuccess.style.display = "flex";
+
+        setTimeout(()=>{
+          addSuccess.style.display = "none";
+        },2000)
+  
+  updateStorage();
   afficheListPlayers();
   afficheListChangement();
+  afficherCardPlayers();
 
 }
 
 // ====================== Affiche Edit Section ========================
 
 
-function openEditSection(index){
+function openEditSection(id){
 
+  let index;
+  for(let j = 0; j < players.length;j++){
+    if(players[j].id == id){
+      index = j;
+    }
+  }
+
+  let getPac = document.getElementById("getPac");
+  let getSho = document.getElementById("getSho");
+  let getPas = document.getElementById("getPas");
+  let getDri = document.getElementById("getDri");
+  let getDef = document.getElementById("getDef");
+  let getPhy = document.getElementById("getPhy");
 
   let ajouteSection = document.getElementById("ajouteSection");
 
@@ -925,6 +1091,24 @@ function openEditSection(index){
   let getPhyElement = document.getElementById("getPhyElement");
 
   let buttonSubmit = document.getElementById("buttonSubmit");
+
+
+    if(players[index].position === "GK"){
+      getPac.innerText = "DIV";
+      getSho.innerText = "HAN";
+      getPas.innerText = "KIC";
+      getDri.innerText = "REF";
+      getDef.innerText = "SPD";
+      getPhy.innerText = "POS";
+    }else{
+      getPac.innerText = "PAC";
+      getSho.innerText = "SHO";
+      getPas.innerText = "PAS";
+      getDri.innerText = "DRI";
+      getDef.innerText = "DEF";
+      getPhy.innerText = "PHY";
+    }
+
 
   ajouteSection.style.display = "flex";
 
@@ -969,18 +1153,7 @@ function editFunction(){
 
   buttonSubmit.onclick = ()=>{
 
-    getNameElement.style.border = "2px solid black";
-    getImageElement.style.border = "2px solid black";
-    getPositionElement.style.border = "2px solid black";
-    getNationalityElement.style.border = "2px solid black";
-    getClubElement.style.border = "2px solid black";
-    getRatElement.style.border = "2px solid black";
-    getPacElement.style.border = "2px solid black";
-    getShoElement.style.border = "2px solid black";
-    getPasElement.style.border = "2px solid black";
-    getDriElement.style.border = "2px solid black";
-    getDefElement.style.border = "2px solid black";
-    getPhyElement.style.border = "2px solid black";
+    
     if(buttonSubmit.value){
       if(getNameElement.value.trim() == ""){
         getNameElement.style.border = "2px solid red";
@@ -1014,6 +1187,21 @@ function editFunction(){
             players[i].defending = getDefElement.value;
             players[i].physical = getPhyElement.value;
 
+            for(let j = 0; j < playersActive.length; j++){
+              if(playersActive[j].id == players[i].id){
+                playersActive[j].name = getNameElement.value;
+                playersActive[j].photo = getImageElement.value;
+                playersActive[j].rating = getRatElement.value;
+                playersActive[j].pace = getPacElement.value;
+                playersActive[j].shooting = getShoElement.value;
+                playersActive[j].passing = getPasElement.value;
+                playersActive[j].dribbling = getDriElement.value;
+                playersActive[j].defending = getDefElement.value;
+                playersActive[j].physical = getPhyElement.value;
+                afficherCardPlayers();
+              }
+            }
+
             titleSection.innerText = "Add Player";
             getNameElement.value = "";
             getImageElement.value = "";
@@ -1030,6 +1218,7 @@ function editFunction(){
             buttonSubmit.innerText = "ADD Player";
             ajouteSection.style.display = "none";
 
+            updateStorage();
             afficheListChangement();
             afficheListPlayers();
             let addSuccess = document.getElementById("addSuccess");
@@ -1169,6 +1358,17 @@ function selectPosition(ID){
         } else if (getPositionPlay === "GOL" && positionSelected === "GK" && playersActive[j].active === "GK") {
             playersActive.splice(j, 1);
         }
+      }
+        for(let j = 0; j < playersActive.length; j++){
+          if(positionSelected === "CH"){
+          answer = false;
+          if(players[i].id == playersActive[j].id){
+            playersActive.splice(j,1);
+          }
+          afficheListChangement();
+
+        } 
+          
         }
         
         for(let j = 0; j < playersActive.length; j++){
@@ -1243,6 +1443,7 @@ function selectPosition(ID){
     }
     addPlayerTeamSection.style.display = "none";
 
+    updateStorage();
     afficherCardPlayers();
     afficheListChangement();
   }
@@ -1267,7 +1468,7 @@ function afficherCardPlayers(){
           (j === 11 && playersActive[i].positionPlay === "DEF" && playersActive[i].active === "LB") ||
           (j === 13 && playersActive[i].positionPlay === "DEF" && playersActive[i].active === "CB") ||
           (j === 14 && playersActive[i].positionPlay === "DEF" && playersActive[i].active === "LWB") ||
-          (j === 17 && playersActive[i].positionPlay === "GOL" && playersActive[i].active === "GK")
+          (j === 15 && playersActive[i].positionPlay === "GOL" && playersActive[i].active === "GK")
       ) {
           answer = true;
           index = i;
@@ -1289,7 +1490,7 @@ function afficherCardPlayers(){
           (j === 11 && playersActive[i].positionPlay === "DEF" && playersActive[i].active === "LB") ||
           (j === 13 && playersActive[i].positionPlay === "DEF" && playersActive[i].active === "CB") ||
           (j === 14 && playersActive[i].positionPlay === "DEF" && playersActive[i].active === "LWB") ||
-          (j === 17 && playersActive[i].positionPlay === "GOL" && playersActive[i].active === "GK")
+          (j === 15 && playersActive[i].positionPlay === "GOL" && playersActive[i].active === "GK")
       ) {
           answer = true;
           index = i;
@@ -1300,9 +1501,33 @@ function afficherCardPlayers(){
       }
     }
       
-    if(answer == true){
+    let getPac;
+    let getSho;
+    let getPas;
+    let getDri;
+    let getDef;
+    let getPhy;
+    if(answer === true){
+
+      if(playersActive[index].position === "GK"){
+        getPac = "DIV";
+        getSho = "HAN";
+        getPas = "KIC";
+        getDri = "REF";
+        getDef = "SPD";
+        getPhy = "POS";
+      }else{
+        getPac = "PAC";
+        getSho = "SHO";
+        getPas = "PAS";
+        getDri = "DRI";
+        getDef = "DEF";
+        getPhy = "PHY";
+      }
+
+    
       getTeamPosition[j].innerHTML = `
-        <div class="h-full w-full bg-[url(../img/badge_gold.webp)] bg-[length:100%_115%] bg-no-repeat bg-center">
+        <div onclick="openEditSection(${playersActive[index].id})" class="h-full w-full bg-[url(../img/badge_gold.webp)] bg-[length:100%_115%] bg-no-repeat bg-center">
             <div class="h-[35%] w-full relative flex flex-col justify-end pl-6  max-md:pl-3">
                 <h2 class="font-bold text-[1rem] mb-[-2px] max-lg:text-[0.7rem] max-md:text-[0.5rem]">${playersActive[index].rating}</h2>
                 <h3 class="text-[0.5rem] font-semibold max-lg:text-[0.5rem] max-md:text-[0.3rem]">RW</h3>
@@ -1314,27 +1539,27 @@ function afficherCardPlayers(){
                 <h2 class="w-full text-center text-[0.6rem] font-bold max-lg:text-[0.4rem]  max-md:text-[0.3rem]">${playersActive[index].name}</h2>
                 <div class="w-full flex justify-center gap-2  max-lg:gap-[3px]">
                     <div>
-                        <h5 class="text-[0.35rem] font-medium mb-[-4px] max-lg:text-[0.25rem] max-md:text-[0.2rem] max-md:mb-[-2px]">PAC</h5>
+                        <h5 class="text-[0.35rem] font-medium mb-[-4px] max-lg:text-[0.25rem] max-md:text-[0.2rem] max-md:mb-[-2px]">${getPac}</h5>
                         <h6 class="text-[0.6rem] font-semibold max-lg:text-[0.45rem] max-md:text-[0.4rem]">${playersActive[index].pace}</h6>
                     </div>
                     <div>
-                        <h5 class="text-[0.35rem] font-medium mb-[-4px] max-lg:text-[0.25rem] max-md:text-[0.2rem] max-md:mb-[-2px]">SHO</h5>
+                        <h5 class="text-[0.35rem] font-medium mb-[-4px] max-lg:text-[0.25rem] max-md:text-[0.2rem] max-md:mb-[-2px]">${getSho}</h5>
                         <h6 class="text-[0.6rem] font-semibold max-lg:text-[0.45rem] max-md:text-[0.4rem]">${playersActive[index].shooting}</h6>
                     </div>
                     <div>
-                        <h5 class="text-[0.35rem] font-medium mb-[-4px] max-lg:text-[0.25rem] max-md:text-[0.2rem] max-md:mb-[-2px]">PAS</h5>
+                        <h5 class="text-[0.35rem] font-medium mb-[-4px] max-lg:text-[0.25rem] max-md:text-[0.2rem] max-md:mb-[-2px]">${getPas}</h5>
                         <h6 class="text-[0.6rem] font-semibold max-lg:text-[0.45rem] max-md:text-[0.4rem]">${playersActive[index].passing}</h6>
                     </div>
                     <div>
-                        <h5 class="text-[0.35rem] font-medium mb-[-4px] max-lg:text-[0.25rem] max-md:text-[0.2rem] max-md:mb-[-2px]">DRI</h5>
+                        <h5 class="text-[0.35rem] font-medium mb-[-4px] max-lg:text-[0.25rem] max-md:text-[0.2rem] max-md:mb-[-2px]">${getDri}</h5>
                         <h6 class="text-[0.6rem] font-semibold max-lg:text-[0.45rem] max-md:text-[0.4rem]">${playersActive[index].dribbling}</h6>
                     </div>
                     <div>
-                        <h5 class="text-[0.35rem] font-medium mb-[-4px] max-lg:text-[0.25rem] max-md:text-[0.2rem] max-md:mb-[-2px]">DEF</h5>
+                        <h5 class="text-[0.35rem] font-medium mb-[-4px] max-lg:text-[0.25rem] max-md:text-[0.2rem] max-md:mb-[-2px]">${getDef}</h5>
                         <h6 class="text-[0.6rem] font-semibold max-lg:text-[0.45rem] max-md:text-[0.4rem]">${playersActive[index].defending}</h6>
                     </div>
                     <div>
-                        <h5 class="text-[0.35rem] font-medium mb-[-4px] max-lg:text-[0.25rem] max-md:text-[0.2rem]  max-md:mb-[-2px]">PHY</h5>
+                        <h5 class="text-[0.35rem] font-medium mb-[-4px] max-lg:text-[0.25rem] max-md:text-[0.2rem]  max-md:mb-[-2px]">${getPhy}</h5>
                         <h6 class="text-[0.6rem] font-semibold max-lg:text-[0.45rem] max-md:text-[0.4rem]">${playersActive[index].physical}</h6>
                     </div>
                 </div>
@@ -1351,4 +1576,5 @@ function afficherCardPlayers(){
     }
   }
 }
+
 
