@@ -75,6 +75,20 @@
     </footer>
     
     
-    <script src="js/script.js"></script>
+    <script>
+        let getMenu = document.getElementById("getMenu");
+  let closeMenu = document.getElementById("closeMenu");
+  let openMenu = document.getElementById("openMenu");
+
+
+  openMenu.onclick = ()=>{
+    getMenu.style.width = "100%"
+  }
+
+  closeMenu.onclick = ()=>{
+    getMenu.style.width = "0%"
+  }
+  
+    </script>
 </body>
 </html>
