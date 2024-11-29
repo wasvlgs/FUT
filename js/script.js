@@ -725,6 +725,9 @@ function popUpAjoutSection(){
   openAjoutSection[0].onclick = ()=>{
     ajouteSection.style.display = "flex";
   }
+  openAjoutSection[1].onclick = ()=>{
+    ajouteSection.style.display = "flex";
+  }
   
   closeAffichePlayers.onclick = ()=>{
     document.querySelector("aside").style.display = "block";
