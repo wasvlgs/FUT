@@ -508,8 +508,8 @@ document.addEventListener("DOMContentLoaded",()=>{
     searchFunction();
     editFunction();
     afficherCardPlayers();
+    updateAll();
 
-    console.log(playersActive)
 })
 
 
@@ -551,7 +551,7 @@ function afficheListPlayers(){
 
 function afficheListChangement(){
   let changementElement = document.getElementById("changementElement");
-  let response = true;
+  let response;
   changementElement.innerHTML = '';
 
   let getPac;
@@ -562,13 +562,20 @@ function afficheListChangement(){
     let getPhy;
 
   for(let i = 0; i < players.length; i++){
-    for(let j = 0; j < playersActive.length; j++){
-      if(players[i].id == playersActive[j].id){
-        response = false;
+
+      if(playersActive.length > 0){
+        for(let j = 0; j < playersActive.length; j++){
+          if(players[i].id == playersActive[j].id){
+            response = false;
+            break;
+          }else{
+            response = true;
+          }
+        }
       }else{
         response = true;
       }
-    }
+      
       if(response == true){
         if(players[i].position === "GK"){
           getPac = "DIV";
@@ -718,15 +725,14 @@ function popUpAjoutSection(){
   openAjoutSection[0].onclick = ()=>{
     ajouteSection.style.display = "flex";
   }
-  openAjoutSection[1].onclick = ()=>{
-    document.querySelector("aside").style.display = "block";
-  }
-  openAjoutSection[1].onclick = ()=>{
-    document.querySelector("aside").style.display = "block";
-  }
+  
   closeAffichePlayers.onclick = ()=>{
-    document.querySelector("aside").style.display = "none";
+    document.querySelector("aside").style.display = "block";
   }
+  closeAddPlayerTeam.onclick = ()=>{
+    addPlayerTeamSection.style.display = "none";
+  }
+
   closeAjoutSection.onclick = ()=>{
     ajouteSection.style.display = "none";
 
@@ -1022,22 +1028,18 @@ function searchFunction(){
 
 
 function removePlayer(id){
-  let indexPrincipe = 0;
-  let indexTeam = 0;
 
   for(let i = 0; i < players.length; i++){
     if(players[i].id == id){
-      indexPrincipe = i;
+      players.splice(i,1);
     }
   }
   for(let j = 0; j < playersActive.length; j++){
-    if(players[j].id == id){
-      indexTeam = j;
+    if(playersActive[j].id == id){
+      playersActive.splice(j,1);
     }
   }
   
-  players.splice(indexPrincipe,1);
-  playersActive.splice(indexTeam,1);
   let addSuccess = document.getElementById("addSuccess");
         addSuccess.innerHTML = `<div class="w-full max-w-[400px] bg-[#1dbb1d] h-full rounded-[5px] border-4 border-[green] flex items-center pl-5">
           <h6 class="font-semibold text-white">Player removed avec success</h6>
@@ -1578,3 +1580,10 @@ function afficherCardPlayers(){
 }
 
 
+function updateAll(){
+  let updateAll = document.getElementById("updateAll");
+  updateAll.onclick = ()=>{
+    localStorage.clear();
+    location.reload();
+  }
+}
