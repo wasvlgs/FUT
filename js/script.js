@@ -525,7 +525,7 @@ function afficheListPlayers(){
 
     for(let i = 0; i < players.length; i++){
         listElement.innerHTML += `
-        <div draggable="true" class="player w-full min-h-[60px] bg-[#2a2a30] flex items-center justify-between rounded-[5px] cursor-pointer">
+        <div class="player w-full min-h-[60px] bg-[#2a2a30] flex items-center justify-between rounded-[5px] cursor-pointer">
     
                 <div onclick="selectPosition(${players[i].id})" class="flex items-center w-[80%] pl-5 cursor-pointer">
                         <div class="profileImage w-[40px] h-[40px] rounded-[50%] bg-[#bfbfbf] overflow-hidden">
@@ -593,7 +593,7 @@ function afficheListChangement(){
           getPhy = "PHY";
         }
         changementElement.innerHTML += `
-      <div  onclick="openEditSection(${players[i].id})" draggable="true" class="changement w-full max-w-[200px] h-[280px] bg-[#1a1a1a] rounded-[15px] text-white shadow-[0px_0px_3px_-1px_yellow]">
+      <div style="cursor: pointer;" onclick="openEditSection(${players[i].id})" class="changement w-full max-w-[200px] h-[280px] bg-[#1a1a1a] rounded-[15px] text-white shadow-[0px_0px_3px_-1px_yellow]">
 
                     <div class="topCardChangement h-[35%] w-full flex justify-center items-center">
                         <div class="profileChangement w-[80px] h-[80px] rounded-[50%] bg-[#6c6c6c] flex justify-center items-center overflow-hidden">
