@@ -721,16 +721,17 @@ function popUpAjoutSection(){
   let closeAjoutSection = document.getElementById("closeAjoutSection");
   let closeAddPlayerTeam = document.getElementById("closeAddPlayerTeam");
   let closeAffichePlayers = document.getElementById("closeAffichePlayers");
+  let aside = document.querySelector("aside");
 
   openAjoutSection[0].onclick = ()=>{
     ajouteSection.style.display = "flex";
   }
   openAjoutSection[1].onclick = ()=>{
-    ajouteSection.style.display = "flex";
+    aside.style.display = "block";
   }
   
   closeAffichePlayers.onclick = ()=>{
-    document.querySelector("aside").style.display = "block";
+    aside.style.display = "none";
   }
   closeAddPlayerTeam.onclick = ()=>{
     addPlayerTeamSection.style.display = "none";
