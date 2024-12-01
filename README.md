@@ -13,5 +13,7 @@ Tailwind CSS : Framework CSS pour un design réactif et moderne.
 JavaScript : Logique et interactivité du site.
 #### Liens :
 GitHub Repository : https://github.com/wasvlgs/FUT
+
 Site Web en ligne : https://wasvlgs.github.io/FUT/
+
 Planification: https://github.com/users/wasvlgs/projects/5
